@@ -2,11 +2,12 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const app = express();
+const path = require("path");
 
 let corsOptions = {
     origin: "http://localhost:3000"
   };
-
+  
   app.use(cors(corsOptions));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
@@ -36,15 +37,13 @@ const db = require("./models");
 const Role = db.role;
 
 
+app.use("/image", express.static(__dirname + '/public'));
 
-app.get("/", (req, res) => {
-    res.json({ message: "Welcome" });
-  });
-  
+
 
   require("./routes/auth.routes")(app);
   require("./routes/user.routes")(app);
-  
+
 
 
   function initial() {
