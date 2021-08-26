@@ -16,7 +16,8 @@ exports.signup = (req, res) => {
     address:"",
     zip:"",
     city:"",
-    country:""
+    country:"",
+    profilePic:""
   });
 
   user.save((err, user) => {
@@ -113,6 +114,7 @@ exports.signin = (req, res) => {
         roles: authorities,
         accessToken: token,
         refreshToken: refreshToken,
+        profilePic:user.profilePic
       });
     });
 };
