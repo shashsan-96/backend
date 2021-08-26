@@ -18,7 +18,8 @@ const User = mongoose.model(
     address:String,
     zip:String,
     city:String,
-    country:String
+    country:String,
+    profilePic: String
 
   })
 );

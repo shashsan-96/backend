@@ -2,6 +2,7 @@ const db = require("../models");
 const user= db.user;
 
 
+
 //find user details
 exports.findOne = (req, res) => {
   const id = req.params.id;
@@ -25,16 +26,40 @@ exports.update = (req, res) => {
       message: "Data to update can not be empty!"
     });
   }
-
+  const {file} = req
+  console.log(file)
   const id = req.params.id;
 
   user.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
     .then(data => {
+      
       if (!data) {
         res.status(404).send({
           message: `Cannot update  with id=${id}. Maybe user was not found!`
         });
-      } else res.send({ message: "user was updated successfully." });
+      } else 
+      {
+        data.username =  req.body.username
+        data.email =  req.body.email
+        data.username = req.body.username
+        data.firstname =  req.body.firstname
+        data.lastname =  req.body.lastname
+        data.mobile =  req.body.mobile 
+        data.address =  req.body.address
+        data.zip =  req.body.zip 
+        data.city =  req.body.city 
+        data.country =  req.body.country
+        data.profilePic =  req.file.filename
+
+        
+        data.save()
+        .then(()=>res.json("updated succesfully")).catch(err=>{res.status(500).send({
+          message: "Error updating" 
+        })})
+
+      }
+      
+
     })
     .catch(err => {
       res.status(500).send({
@@ -46,7 +71,6 @@ exports.update = (req, res) => {
 // Delete
 exports.delete = (req, res) => {
   const id = req.params.id;
-  console.log(id);
   user.findByIdAndRemove(id, { useFindAndModify: false })
     .then(data => {
       if (!data) {
