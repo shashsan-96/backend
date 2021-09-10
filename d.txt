@@ -1,0 +1,135 @@
+import React, { Component } from 'react';
+import axios from 'axios';
+import ro9 from './../assets/images/ro9.jpg';
+import ro7 from './../assets/images/ro7.jpg';
+import ro8 from './../assets/images/ro8.jpg';
+import ro5 from './../assets/images/ro5.jpg';
+import { Link } from 'react-router-dom';
+
+
+import '../app.css';
+
+
+
+
+export default class StationeryDetails extends Component {
+
+    constructor(props){
+        super(props);
+        this.state={
+            stationery:{}
+        };
+
+        }
+        
+componentDidMount(){
+
+    const id = this.props.match.params.id;
+    axios.get(`/stationery/${id}`).then((res)=>{
+        if(res.data.success){
+        this.setState({
+            stationery:res.data.stationery
+        });
+        console.log(this.state.stationery);
+    }
+    });
+    
+}
+
+    
+    render() {
+
+        const {Title,ISBN,Category,Price,Description,Img} = this.state.stationery;
+        
+        return (
+          <div>
+      
+
+        
+        <div>
+        <img className="rd1" src={`/uploads/${Img}`} alt="hi"/>
+          </div>
+  
+        <div className="rd2">
+
+        <h4>Main features</h4>
+        <dl className="row" style={{paddingLeft:"90px"}}>
+       
+          
+                  
+                 
+                    
+                
+                <dt className="col-sm-3">ISBN</dt>
+                  <dd className="col-sm-9">{ISBN}</dd>
+  
+  
+                  <dt className="col-sm-3">Category</dt>
+                  <dd className="col-sm-9">{Category}</dd>
+  
+                  <dt className="col-sm-3">Price</dt>
+                  <dd className="col-sm-9">LKR{Price}Sqrt</dd>
+  
+                  <dt className="col-sm-3">Description</dt>
+                  <dd className="col-sm-9">{Description}</dd>
+  
+                 
+                 
+                 
+           
+        </dl>
+        </div>    
+        <div className="rd3">
+        <h4>Amenities:</h4>
+                      <p><i class="fa fa-check-circle-o green-text pr-3" aria-hidden="true"></i>Fitness Center</p>
+                      <p><i class="fa fa-check-circle-o green-text pr-3" aria-hidden="true"></i>24 hour front desk</p>
+                      <p><i class="fa fa-check-circle-o green-text pr-3" aria-hidden="true"></i>Hot Tub or Spa</p>
+                      <p><i class="fa fa-check-circle-o green-text pr-3" aria-hidden="true"></i>Concierge</p>
+                      <p><i class="fa fa-check-circle-o green-text pr-3" aria-hidden="true"></i>Airport Transportation</p>
+                      <p><i class="fa fa-check-circle-o green-text pr-3" aria-hidden="true"></i>Dry cleaning service</p>
+                      <p><i class="fa fa-check-circle-o green-text pr-3" aria-hidden="true"></i>Attraction Shuttle Service</p>
+                      <p><i class="fa fa-check-circle-o green-text pr-3" aria-hidden="true"></i>Refrigerated mini bar</p>
+          </div> 
+  
+  <div className="rd6"><h1 className="rdf" >WHY YOU</h1>
+                        <p className="rdf">WILL LOVE IT</p>
+
+                        <h4 style={{paddingBottom:"2px"}}>Breath-Taking Views</h4>
+                        <p className="rdf2">Located on the 5th to 7th floors, the Deluxe Rooms are privileged with incomparable views of the gorgeous Anuradhapura cityscape</p>
+                        <h4>Luxurious Escape</h4>
+                        <p className="rdf2">Located high above the calm city, the sumptuous Deluxe Rooms promises a luxurious escape.</p>
+                        
+                        <h4>Spacious Living</h4>
+                        <p className="rdf2">Delight in the feeling of infinite space afforded by the floor-to-ceiling windows & spacious room designs.</p>
+        </div>
+
+        <div className="rdp1" style={{ backgroundImage: `url(${ro9})`,backgroundSize:"cover"  }}></div>
+        <div className="rdp2" style={{ backgroundImage: `url(${ro7})`,backgroundSize:"cover"  }}></div>
+        <div className="rdp3"style={{ backgroundImage: `url(${ro5})`,backgroundSize:"cover"  }}></div>
+        <div className="rdp4" style={{ backgroundImage: `url(${ro8})`, backgroundSize:"cover" }}></div>
+      
+        <div className="rh3"> 
+           
+           <button className="btn btn-success"><Link to="/display" style={{textDecoration:'none',color:'white'}}>Looking for different</Link></button>
+         
+              </div>
+      
+       
+        
+      </div>
+
+      
+
+     
+      
+      
+  
+  
+
+
+    
+        )       
+        
+    }
+}
+
