@@ -1,5 +1,4 @@
-# backend
-basic config created
+
 # Group-ID-2021S1_JUNE_WD_11
 ## Project name-Online Book Shop System
 ## Group Details
