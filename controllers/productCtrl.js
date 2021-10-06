@@ -25,6 +25,7 @@ class APIfeatures {
        return this;
     }
 
+    //sorting
     sorting(){
         if(this.queryString.sort){
             const sortBy = this.queryString.sort.split(',').join(' ')
@@ -36,6 +37,7 @@ class APIfeatures {
         return this;
     }
 
+    //paginating
     paginating(){
         const page = this.queryString.page * 1 || 1
         const limit = this.queryString.limit * 1 || 9
@@ -45,6 +47,7 @@ class APIfeatures {
     }
 }
 
+//book product control 
 const productCtrl = {
     getProducts: async(req, res) =>{
         try {
@@ -63,6 +66,7 @@ const productCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
+    //create book product
     createProduct: async(req, res) =>{
         try {
             const {product_id, title, author, language, category, price, isbn, publisher, description, images} = req.body;
@@ -83,6 +87,7 @@ const productCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
+    //delete book product
     deleteProduct: async(req, res) =>{
         try {
             await Products.findByIdAndDelete(req.params.id)
@@ -91,6 +96,7 @@ const productCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
+ 
     updateProduct: async(req, res) =>{
         try {
             const {title, author, language, category, price, isbn, publisher, description, images} = req.body;
