@@ -1,6 +1,7 @@
 const Category = require('../models/categoryModel')
 const Products = require('../models/productModel')
 
+//category control
 const categoryCtrl = {
     getCategories: async(req, res) =>{
         try {
@@ -10,6 +11,8 @@ const categoryCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
+
+    //create category
     createCategory: async (req, res) =>{
         try {
             // if user have role = 1 ---> admin
@@ -26,6 +29,7 @@ const categoryCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
+    //delete category
     deleteCategory: async(req, res) =>{
         try {
             const products = await Products.findOne({category: req.params.id})
@@ -39,6 +43,7 @@ const categoryCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
+ 
     updateCategory: async(req, res) =>{
         try {
             const {name} = req.body;
