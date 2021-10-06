@@ -44,6 +44,7 @@ const categoryCtrl = {
         }
     },
  
+    //update category
     updateCategory: async(req, res) =>{
         try {
             const {name} = req.body;
