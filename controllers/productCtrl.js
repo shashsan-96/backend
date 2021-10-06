@@ -96,7 +96,8 @@ const productCtrl = {
             return res.status(500).json({msg: err.message})
         }
     },
- 
+    
+    //update book product
     updateProduct: async(req, res) =>{
         try {
             const {title, author, language, category, price, isbn, publisher, description, images} = req.body;
